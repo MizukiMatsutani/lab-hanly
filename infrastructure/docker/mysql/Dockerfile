@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM mariadb:10.3
 
 ENV TZ=Asia/Tokyo \
     MYSQL_DATABASE=hanly-db \

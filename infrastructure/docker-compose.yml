@@ -7,10 +7,10 @@ services:
     build: ./docker/php
     container_name: "hanly-app"
     volumes:
-      - php-fpm-socket:/var/run/php-fpm
-      - ../src:/work/backend
-      - ./docker/php/bash/.bash_history:/root/.bash_history
-      - ./docker/php/bash/psysh:/root/.config/psysh
+      - php-fpm-socket:/var/run/php-fpm:delegated
+      - ../src:/work/backend:delegated
+      - ./docker/php/bash/.bash_history:/root/.bash_history:delegated
+      - ./docker/php/bash/psysh:/root/.config/psysh:delegated
 
   web:
     build: ./docker/nginx
@@ -18,13 +18,13 @@ services:
     ports:
       - 8080:80
     volumes:
-      - php-fpm-socket:/var/run/php-fpm
-      - ../src:/work/backend
+      - php-fpm-socket:/var/run/php-fpm:delegated
+      - ../src:/work/backend:delegated
 
   db:
     build: ./docker/mysql
     container_name: "hanly-db"
     volumes:
-      - db-store:/var/lib/mysql
+      - db-store:/var/lib/mysql:delegated
     ports:
       - 33306:3306
